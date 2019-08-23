@@ -11,7 +11,7 @@ const Container = styled(motion.div)`
 
 const SidebarContainer = styled(motion.div)`
   position: fixed;
-  background-color: #1c2022;
+  background-color: ${({ color }) => `${color}`};
   width: ${({ width }) => `${width}px`};
   height: 100%;
   box-sizing: border-box;
@@ -56,8 +56,7 @@ const HamburgerButton = ({ x, width, isOpen, setOpen }) => {
   )
 }
 
-const Sidebar = ({ width, children }) => {
-  if (width === undefined) width = 320
+const Sidebar = ({ width = 320, color = "#1c2022", children }) => {
   const [isOpen, setOpen] = useState(false)
   const x = useSpring(0, { stiffness: 400, damping: 40 })
 
@@ -90,6 +89,7 @@ const Sidebar = ({ width, children }) => {
     >
       <HamburgerButton x={x} width={width} isOpen={isOpen} setOpen={setOpen} />
       <SidebarContainer
+        color={color}
         width={width}
         transition={{
           type: "spring",
